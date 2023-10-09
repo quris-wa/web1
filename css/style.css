@@ -1,0 +1,107 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 15px;
+    color: #333333
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.header {
+    width: 19em;
+    padding: 1em;
+    margin-left: 4em;
+    margin-top: 2em;
+    font-size: 105%;
+    color: #333333;
+    background-color: rgba(192, 122, 255, 0.7);
+    border-radius: 20px;
+}
+
+.personal_info {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.header_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav_link {
+    transition: 2s;
+}
+
+.nav_link:hover {
+    transform: scale(2);
+}
+
+.nav_link:hover:after {
+    display: block;
+}
+
+.parameters {
+    width: 20em;
+    padding: 1em;
+    margin-left: 4em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: rgba(192, 122, 255, 0.7);
+    border-radius: 20px;
+    float: left;
+    text-align: center;
+}
+
+.action-buttons {
+    margin-block-start: 1em;
+    padding: 0.5em;
+    height: auto;
+}
+
+.action-button {
+    padding: 0.25em;
+    color: #333;
+    background-color: lavender;
+    border: lavender solid 2px;
+    border-radius: 10px;
+    width: 6em;
+}
+
+.action-button:hover {
+    color: #333;
+    background-color: rgba(192, 122, 255, 0.7);
+    border: lavender solid 2px;
+}
+
+.result {
+    margin-right: 9.5em;
+    margin-left: auto;
+    width: 50%;
+}
+
+.result-table {
+    border: rgba(192, 122, 255, 0.7) solid 2px;
+    border-radius: 2em;
+    border-spacing: 0.5em;
+    color: #333333;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    font-size: 18px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.graphic {
+    margin-left: 6em;
+    margin-top: 2em;
+}
+
