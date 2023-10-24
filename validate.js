@@ -1,54 +1,51 @@
 const sendButton = document.getElementById("submit_request")
-sendButton.onclick = validate;
-function validate() {
-    const xVal = document.forms['form']['x'].value.replace(/,/, '.');
-    const yVal = document.forms['form']['y'].value.replace(/,/, '.');
-    const rVal = document.forms['form']['r'].value.replace(/,/, '.');
-    console.log('form values: ' + xVal + ' ' + yVal + ' ' + rVal);
-    if (isEmpty(xVal)) {
-        xTable = document.getElementsByClassName('x-table');
-        for (let i = 0; i < xTable.length; ++i) {
-            xTable.item(i).style.background = 'red';
-        }
-        alert('Select X');
-    } else if (isEmpty(yVal)) {
-        document.getElementsByClassName('text-input')[1].style.background = 'red';
-        alert('Enter a number in Y field');
-    } else if (isEmpty(rVal)) {
-        document.getElementsByClassName('text-input')[1].style.background = 'red';
-        alert('Enter a number in R field');
-    } else {
-        if (isNaN(xVal) || (Math.abs(xVal) > 4)) {
-            for (let i = 0; i < xTable.length; ++i) {
-                xTable.item(i).style.background = 'red';
-            }
-            alert('X must be integer number in range [-4; 4]');
-        } else if (isNaN(yVal) || yVal <= -3 || yVal >= 5) {
-            document.getElementsByClassName('text-input')[1].style.background = 'red';
-            alert('Y must be number in range (-3; 5)');
-        } else if (isNaN(rVal) || rVal <= 2 || rVal >= 5) {
-            document.getElementsByClassName('text-input')[1].style.background = 'red';
-            alert('R must be number in range (2; 5)');
-        }
-         else send(document.forms['form']['x'], document.forms['form']['y'], document.forms['form']['r']);
+sendButton.onclick = validateForm;
+function validateForm() {
+    var x = document.getElementById("x").value;
+    var y = document.getElementById("y").value;
+    var r = document.getElementById("r").value;
+    var xValid = parseFloat(x) >= -4 && parseFloat(x) <= 4;
+    var yValid = parseFloat(y) >= -3 && parseFloat(y) <= 5;
+    var rValid = parseFloat(r) >= 2 && parseFloat(r) <= 5;
 
+    if (!xValid) {
+        document.getElementById("xError").classList.add("error");
+    } else {
+        document.getElementById("xError").classList.remove("error");
     }
-    const table = document.getElementById("table");
-    function send(x, y, r) {
-        $.ajax({
-            url: 'php/check.php',
-            method: 'POST',
-            data: {x, y, r},
-            success: function (data) {
-                console.log(data)
-                const tbody = table.querySelector('tbody');
-                tbody.innerHTML += data;
-            },
-            error: function () {
-                alert('Smth went wrong');
-            }
-        });
+
+    if (!yValid) {
+        document.getElementById("yError").classList.add("error");
+    } else {
+        document.getElementById("yError").classList.remove("error");
     }
+
+    if (!rValid) {
+        document.getElementById("rError").classList.add("error");
+    } else {
+        document.getElementById("rError").classList.remove("error");
+    }
+
+    if (xValid && yValid && rValid) {
+        sendRequest(x, y, r);
+    }
+    return false; // Отменяет отправку формы
+}
+
+function sendRequest(x, y, r) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "check.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = xhr.responseText;
+            document.getElementById("results").innerHTML = response;
+        }
+    };
+
+    var params = "x=" + x + "&y=" + y + "&r=" + r;
+    xhr.send(params);
+}
 
     function isEmpty(obj) {
         for (let key in obj) {
@@ -56,4 +53,3 @@ function validate() {
         }
         return true;
     }
-}

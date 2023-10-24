@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +28,7 @@ session_start();
         </div>
     </div>
 </div>
-<form class="parameters" action="php/check.php" method="post" name="form">
+<form class="parameters" name="form">
     <img src="img/graphic.png" width="200">
     <h3>Select the X value:</h3>
     <table>
@@ -56,7 +53,7 @@ session_start();
             <td><label>
                     <input id="radio7" class="radioX" type="radio" name="x" value="2"> 2</label></td>
             <td><label>
-                    <input id="radio8" class="radioX" type="radio" name="x" value="3"> 3</label></td>
+                    <input id="radio8" class "radioX" type="radio" name="x" value="3"> 3</label></td>
             <td><label>
                     <input id="radio9" class="radioX" type="radio" name="x" value="4"> 4</label></td>
         </tr>
@@ -73,7 +70,7 @@ session_start();
         </label>
     </label>
     <div class="action-buttons">
-        <button class="action-button" type="submit" id="submit_request" name="check" value="check">
+        <button class="action-button" type="button" id="submit_request" name="check">
             Check
         </button>
         <button class="action-button" type="submit" id="clear_table" name="clear" value="clear">
@@ -94,22 +91,11 @@ session_start();
         </tr>
         </thead>
         <tbody>
-        <?php
-        foreach ($_SESSION['table'] as $res_arr) {
-            echo "<tr>
-                <td> $res_arr[0]</td>
-                <td> $res_arr[1]</td>
-                <td> $res_arr[2]</td>
-                <td> $res_arr[3]</td>
-                <td> $res_arr[4]</td>
-                <td $res_arr[6]> $res_arr[5]</td>
-            </tr>";
-        }
-        ?>
+
         </tbody>
+
     </table>
 </div>
 <script src="validate.js"></script>
 </body>
 </html>
-
